@@ -1,0 +1,23 @@
+{
+	"title": "Taiyaki Sakura",
+	"nav": {
+		"home": "Homepage",
+		"tour": "Tour",
+		"map": "Map",
+		"guild": "Guild",
+		"build": "Build"
+	},
+	"footer": {
+		"login": "Sign in",
+		"join": "How to join the game?",
+		"edit": "How to edit the site?",
+		"copyrights": "Copyright Statments",
+		"policy": "Privacy Policy",
+		"terms": "Terms of Use and Disclaimers"
+	},
+	"sr": {
+	    "nav": "Skip to navigation",
+	    "main": "Skip to main content",
+	    "footer": "Skip to footer"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"url": "https://shiro-satellite.phwu.work/data/",
+	"center": {
+		"x": -385,
+		"y": 552
+	},
+	"enableDebugTile": false,
+	"enableSelection": true,
+  "mapContainerId": "taiyakiMapContainer",
+  "mousePositionId": "taiyakiMousePosition",
+  "mousePositionClass": "taiyakiMousePosition"
+}

@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:nx22', '.' ]
+images:
+- 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:nx22'
