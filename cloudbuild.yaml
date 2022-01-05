@@ -1,7 +1,7 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:nx22', '.' ]
+  args: [ 'build', '-t', 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA', '.' ]
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
@@ -10,8 +10,8 @@ steps:
   - 'deploy'
   - 'sakura-frontend'
   - '--image'
-  - 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:nx22'
+  - 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA'
   - '--region'
   - 'asia-east1'
 images:
-- 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:nx22'
+- 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA'
