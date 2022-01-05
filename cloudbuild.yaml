@@ -2,6 +2,9 @@ steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'build', '-t', 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA', '.' ]
+# Push the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: gcloud
