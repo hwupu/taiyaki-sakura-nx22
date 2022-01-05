@@ -7,10 +7,10 @@ export default function Navigation() {
   const { t } = useTranslation('common');
 
   const links = [
-    { href: '/tour', t: 'nav.tour', css: 'sm:order-1' },
-    { href: '/', t: 'nav.map', css: 'sm:order-2' },
-    { href: '/', t: 'nav.guild', css: 'sm:order-4' },
-    { href: '/', t: 'nav.build', css: 'sm:order-5' },
+    { href: '/', t: 'nav.tour', css: 'sm:order-1 cursor-not-allowed' },
+    { href: '/map', t: 'nav.map', css: 'sm:order-2' },
+    { href: '/', t: 'nav.guild', css: 'sm:order-4 cursor-not-allowed' },
+    { href: '/', t: 'nav.build', css: 'sm:order-5 cursor-not-allowed' },
   ];
 
   const listLinks = links.map((link) => (
