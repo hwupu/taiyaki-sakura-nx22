@@ -16,5 +16,6 @@ steps:
   - 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA'
   - '--region'
   - 'asia-east1'
+  - '--allow-unauthenticated'
 images:
 - 'asia-east1-docker.pkg.dev/taiyaki-sakura/docker-repo/sakura-frontend:$SHORT_SHA'
