@@ -25,7 +25,7 @@ export default function Navigation() {
   ));
 
   return (
-    <nav id="sr-nav" className="shadow-inner shadow-red-500 sm:sticky sm:top-[-130px] sm:mb-[2rem]">
+    <nav id="sr-nav" className="sm:sticky sm:top-[-130px] sm:mb-[2rem] z-40">
       <ul
         className="relative sm:static bottom-0 right-0
                    flex flex-col-reverse gap-4 sm:flex-row sm:justify-center sm:items-end
