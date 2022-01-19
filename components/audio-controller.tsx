@@ -2,22 +2,19 @@ import { useState, useRef } from 'react';
 
 export default function AudioController() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const player = useRef(null);
+  const player = useRef<HTMLMediaElement>(null);
 
   const toggle = () => {
-    // @ts-ignore: Object is possibly 'null'.
-    const paused = player.current.paused;
-    setIsPlaying(!paused);
-    if (paused) {
-      // @ts-ignore: Object is possibly 'null'.
-      player.current.play();
-      // @ts-ignore: Object is possibly 'null'.
-      player.current.volume = 0.3;
-    } else {
-      // @ts-ignore: Object is possibly 'null'.
-      player.current.volume = 0;
-      // @ts-ignore: Object is possibly 'null'.
-      player.current.pause();
+    if (player.current) {
+      const paused = player.current.paused;
+      setIsPlaying(!paused);
+      if (paused) {
+        player.current.play();
+        player.current.volume = 0.3;
+      } else {
+        player.current.volume = 0;
+        player.current.pause();
+      }
     }
   };
 

@@ -9,6 +9,7 @@ export default class StateController extends React.Component {
     super(props);
     this.state = {
       scrollY: 0,
+      phase: 0,
     };
     this.obs = null;
   }
@@ -20,8 +21,9 @@ export default class StateController extends React.Component {
   }
 
   componentWillUnmount() {
-    // @ts-ignore: Object is possibly 'null'.
-    this.obs.unsubscribe();
+    if (this.obs) {
+      this.obs.unsubscribe();
+    }
   }
 
   onScroll = () => {
@@ -36,21 +38,33 @@ export default class StateController extends React.Component {
     });
 
     if (scrollY < snapTop) {
+      this.setState({
+        phase: 0,
+      });
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
     } else if (scrollY != snapLogo && Math.abs(scrollY - snapLogo) < 100) {
+      this.setState({
+        phase: 1,
+      });
       window.scrollTo({
         top: snapLogo,
         behavior: 'smooth',
       });
     } else if (scrollY != snapLogo2 && Math.abs(scrollY - snapLogo2) < 40) {
+      this.setState({
+        phase: 2,
+      });
       window.scrollTo({
         top: snapLogo2,
         behavior: 'smooth',
       });
     } else if (scrollY != snapBottom && Math.abs(scrollY - snapBottom) < 100) {
+      this.setState({
+        phase: 3,
+      });
       window.scrollTo({
         top: snapBottom,
         behavior: 'smooth',

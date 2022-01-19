@@ -22,10 +22,10 @@ class MyDocument extends Document {
           <link rel="alternate icon" href="/favicon.png" />
           <link rel="mask-icon" href="/mask-icon.svg" color="#000000" />
           <link rel="applie-touch-icon" href="/apple-touch-icon.png" />
-	  <link rel="manifest" href="/manifest.json" />
-	  <link href="/css/fontawesome.min.css" rel="stylesheet" />
-	  <link href="/css/brands.min.css" rel="stylesheet" />
-	  <link href="/css/solid.min.css" rel="stylesheet" />
+          <link rel="manifest" href="/manifest.json" />
+          <link href="/css/fontawesome.min.css" rel="stylesheet" />
+          <link href="/css/brands.min.css" rel="stylesheet" />
+          <link href="/css/solid.min.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
