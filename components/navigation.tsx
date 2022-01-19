@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
-import AnimatedLogo from '../components/animated-logo';
+import AnimatedLogo from '../components/AnimatedLogo';
 
 export default function Navigation() {
   const { t } = useTranslation('common');
