@@ -18,8 +18,9 @@ const Map: NextPage = () => {
   return <TaiyakiMapView />;
 };
 
-export default Map;
-
+// @ts-ignore
 Map.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
+
+export default Map;
