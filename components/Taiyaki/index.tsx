@@ -40,11 +40,11 @@ export default class TaiyakiMapView extends React.Component {
         maxX: 512 * 10,
         maxY: 512 * 10,
       },
-      spawn: { x: -385, y: 552 * -1 },
+      spawn: { x: -420, y: 600 * -1 },
       center: { x: config.center.x, y: config.center.y * -1 },
     };
     this.setState({
-      mapController: new TaiyakiMapController(options),
+      mapController: TaiyakiMapController.getInstance(options),
     });
   }
 

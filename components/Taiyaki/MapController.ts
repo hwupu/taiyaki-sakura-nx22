@@ -136,7 +136,7 @@ const _initModifyLandmark = function (vectorLayer: VectorLayer<any>): Modify {
 const _initView = function (options: TaiyakiMapConfig, projection: Projection): View {
   return new View({
     center: [options.center.x, options.center.y],
-    zoom: 5,
+    zoom: 6,
     maxZoom: 8,
     minZoom: 1,
     projection: projection,
@@ -144,6 +144,8 @@ const _initView = function (options: TaiyakiMapConfig, projection: Projection): 
 };
 
 export default class TaiyakiMapController {
+  private static instance: TaiyakiMapController;
+
   _map: Map;
   _view: View;
   _extent: number[];
@@ -164,7 +166,7 @@ export default class TaiyakiMapController {
 
   selectedFeature: SelectEvent | undefined;
 
-  constructor(options: TaiyakiMapConfig) {
+  private constructor(options: TaiyakiMapConfig) {
     this._extent = _initExtent(options);
     this._projection = _initProjection(this._extent);
     this._tileGrid = _initTileGrid(this._extent);
@@ -209,6 +211,15 @@ export default class TaiyakiMapController {
         this.selectedFeature = e;
       });
     }
+
+    console.log(this);
+  }
+
+  public static getInstance(options: TaiyakiMapConfig): TaiyakiMapController {
+    if (!TaiyakiMapController.instance) {
+      TaiyakiMapController.instance = new TaiyakiMapController(options);
+    }
+    return TaiyakiMapController.instance;
   }
 
   writeFeature() {
