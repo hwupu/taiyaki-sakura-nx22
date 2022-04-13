@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
-import type { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import Layout from '../components/layout';
+import type { Page } from '../types/page';
+import Layout from '../components/layout-simple';
 import TaiyakiMapView from '../components/Taiyaki';
 
 export async function getStaticProps({ locale }: { locale: string }) {
@@ -14,11 +14,10 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-const Map: NextPage = () => {
+const Map: Page = () => {
   return <TaiyakiMapView />;
 };
 
-// @ts-ignore
 Map.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
