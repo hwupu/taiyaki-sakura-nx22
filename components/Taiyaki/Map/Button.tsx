@@ -7,10 +7,9 @@ type TaiyakiMapButtonConfig = typeof TaiyakiMapButton.defaultProps & {
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean;
   loading?: boolean;
-}
+};
 
 export default class TaiyakiMapButton extends React.Component<TaiyakiMapButtonConfig> {
-
   static defaultProps = {
     label: 'Button',
     icon: 'fa-flag',
@@ -44,21 +43,23 @@ export default class TaiyakiMapButton extends React.Component<TaiyakiMapButtonCo
         disabled={this.props.disabled}
         onClick={this.props.action}
       >
-        { this.props.children ? (
+        {this.props.children ? (
           this.props.children
-        ) :
-          this.props.loading ? (
-            <div>
-              <i className="fa fa-spin fa-spinner-third" aria-hidden="true" title={this.props.label}></i>
-              <span className="sr-only" role="alert" aria-live="polite" aria-busy="true">
-                Loading
-              </span>
-            </div>
-          ) : (
-            <i className={"fa " + this.props.icon} aria-hidden="true" title={this.props.label}></i>
-          )
-        }
+        ) : this.props.loading ? (
+          <div>
+            <i
+              className="fa fa-spin fa-spinner-third"
+              aria-hidden="true"
+              title={this.props.label}
+            ></i>
+            <span className="sr-only" role="alert" aria-live="polite" aria-busy="true">
+              Loading
+            </span>
+          </div>
+        ) : (
+          <i className={'fa ' + this.props.icon} aria-hidden="true" title={this.props.label}></i>
+        )}
       </button>
-    )
+    );
   }
 }

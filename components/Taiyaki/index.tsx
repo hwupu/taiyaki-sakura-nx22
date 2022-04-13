@@ -56,7 +56,6 @@ export default class TaiyakiMapView extends React.Component {
         ) : (
           <div>loading</div>
         )}
-        <TaiyakiMapPanel mapController={this.state.mapController} />
         <div role="application" id="taiyakiMapContainer" className="h-screen"></div>
       </div>
     );

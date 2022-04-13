@@ -1,11 +1,12 @@
 {
-	"url": "https://sakura-satellite.phwu.work/data/",
-	"center": {
-		"x": -420,
-		"y": 600
-	},
-	"enableDebugTile": false,
-	"enableSelection": true,
+  "url": "https://sakura-satellite.phwu.work/data/",
+  "center": {
+    "x": -420,
+    "y": 600
+  },
+  "enableFullTileLayer": true,
+  "enableDebugTile": false,
+  "enableSelection": true,
   "mapContainerId": "taiyakiMapContainer",
   "mousePositionId": "taiyakiMousePosition",
   "mousePositionClass": "taiyakiMousePosition"

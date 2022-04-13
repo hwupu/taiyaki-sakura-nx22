@@ -57,6 +57,25 @@ const _initOverworld = function (projection: Projection, tileGrid: TileGrid): Ti
   });
 };
 
+const _initOverworldFull = function (projection: Projection, tileGrid: TileGrid): TileLayer<XYZ> {
+  return new TileLayer({
+    source: new XYZ({
+      tileUrlFunction: (c) => {
+        if (c[0] > 3) return '';
+        return (
+          config.url + 'map-full/' + (3 - c[0]).toString() + '/r.' + c[1] + '.' + c[2] + '.png'
+        );
+      },
+      tileSize: [512, 512],
+      wrapX: false,
+      projection: projection,
+      tileGrid: tileGrid,
+      imageSmoothing: false,
+    }),
+    zIndex: -1,
+  });
+};
+
 const _initOverworldLight = function (projection: Projection, tileGrid: TileGrid): TileLayer<XYZ> {
   return new TileLayer({
     source: new XYZ({
@@ -70,6 +89,23 @@ const _initOverworldLight = function (projection: Projection, tileGrid: TileGrid
       tileGrid: tileGrid,
       imageSmoothing: false,
     }),
+  });
+};
+
+const _initOverworldBiome = function (projection: Projection, tileGrid: TileGrid): TileLayer<XYZ> {
+  return new TileLayer({
+    source: new XYZ({
+      tileUrlFunction: (c) => {
+        if (c[0] > 3) return '';
+        return config.url + 'biome/r.' + c[1] + '.' + c[2] + '.png';
+      },
+      tileSize: [512, 512],
+      wrapX: false,
+      projection: projection,
+      tileGrid: tileGrid,
+      imageSmoothing: false,
+    }),
+    opacity: 0.7,
   });
 };
 
@@ -153,6 +189,8 @@ export default class TaiyakiMapController {
   _tileGrid: TileGrid;
   _overworldTileLayer: TileLayer<any>;
   _overworldLightTileLayer: TileLayer<any>;
+  _overworldBiomeTileLayer: TileLayer<any>;
+  _overworldFullTileLayer: TileLayer<any>;
   _mousePosition: MousePosition | undefined;
   _labelStyle: Style;
   _landmarkVectorLayer: VectorLayer<any>;
@@ -160,6 +198,8 @@ export default class TaiyakiMapController {
 
   isMousePositionEnabled: boolean;
   isLightTileLayerEnabled: boolean;
+  isBiomeTileLayerEnabled: boolean;
+  isFullTileLayerEnabled: boolean;
   isModifyEnabled: boolean;
   isZoomInDisabled: boolean;
   isZoomOutDisabled: boolean;
@@ -172,6 +212,8 @@ export default class TaiyakiMapController {
     this._tileGrid = _initTileGrid(this._extent);
     this._overworldTileLayer = _initOverworld(this._projection, this._tileGrid);
     this._overworldLightTileLayer = _initOverworldLight(this._projection, this._tileGrid);
+    this._overworldBiomeTileLayer = _initOverworldBiome(this._projection, this._tileGrid);
+    this._overworldFullTileLayer = _initOverworldFull(this._projection, this._tileGrid);
     this._labelStyle = _initStyle();
     this._landmarkVectorLayer = _initLandmark(this._labelStyle);
     this._modifyLandmark = _initModifyLandmark(this._landmarkVectorLayer);
@@ -179,6 +221,8 @@ export default class TaiyakiMapController {
 
     this.isMousePositionEnabled = false;
     this.isLightTileLayerEnabled = false;
+    this.isBiomeTileLayerEnabled = false;
+    this.isFullTileLayerEnabled = false;
     this.isModifyEnabled = false;
     this.isZoomInDisabled = false;
     this.isZoomOutDisabled = false;
@@ -212,7 +256,9 @@ export default class TaiyakiMapController {
       });
     }
 
-    console.log(this);
+    if (config.enableFullTileLayer) {
+      this.enableFullTileLayer();
+    }
   }
 
   public static getInstance(options: TaiyakiMapConfig): TaiyakiMapController {
@@ -240,6 +286,26 @@ export default class TaiyakiMapController {
   disableLightTileLayer() {
     this.isLightTileLayerEnabled = false;
     this._map.removeLayer(this._overworldLightTileLayer);
+  }
+
+  enableBiomeTileLayer() {
+    this.isBiomeTileLayerEnabled = true;
+    this._map.addLayer(this._overworldBiomeTileLayer);
+  }
+
+  disableBiomeTileLayer() {
+    this.isBiomeTileLayerEnabled = false;
+    this._map.removeLayer(this._overworldBiomeTileLayer);
+  }
+
+  enableFullTileLayer() {
+    this.isFullTileLayerEnabled = true;
+    this._map.addLayer(this._overworldFullTileLayer);
+  }
+
+  disableFullTileLayer() {
+    this.isFullTileLayerEnabled = false;
+    this._map.removeLayer(this._overworldFullTileLayer);
   }
 
   enableMousePosition() {

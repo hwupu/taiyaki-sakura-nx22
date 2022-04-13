@@ -8,19 +8,18 @@ interface TaiyakiMapToolbarConfig {
 }
 
 export default class TaiyakiMapToolbar extends React.Component<TaiyakiMapToolbarConfig> {
-
   classes = [
     'absolute',
-    'top-0',
+    'bottom-0',
     'left-0',
     'z-10',
     'w-full',
     'bg-opacity-75',
     'bg-yellow-400',
-    'grid',
-    'grid-cols-3',
-    'items-center',
-  ].join(' ')
+    'flex',
+    'gap-2',
+    'p-2',
+  ].join(' ');
 
   constructor(props: any) {
     super(props);
@@ -28,6 +27,7 @@ export default class TaiyakiMapToolbar extends React.Component<TaiyakiMapToolbar
     // This binding is necessary to make `this` work in the callback
     this.addPoint = this.addPoint.bind(this);
     this.toggleNightVision = this.toggleNightVision.bind(this);
+    this.toggleBiomeVision = this.toggleBiomeVision.bind(this);
     this.toggleMode = this.toggleMode.bind(this);
     this.save = this.save.bind(this);
     this.zoomIn = this.zoomIn.bind(this);
@@ -35,7 +35,7 @@ export default class TaiyakiMapToolbar extends React.Component<TaiyakiMapToolbar
     this.print = this.print.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.mapController.enableMousePosition();
   }
 
@@ -43,12 +43,21 @@ export default class TaiyakiMapToolbar extends React.Component<TaiyakiMapToolbar
     this.props.mapController.addLandmark('test', [0, 0]);
   }
 
-  toggleNightVision (event: MouseEvent) {
+  toggleNightVision(event: MouseEvent) {
     const modeEnabled = this.props.mapController.isLightTileLayerEnabled;
     if (modeEnabled) {
       this.props.mapController.disableLightTileLayer();
     } else {
       this.props.mapController.enableLightTileLayer();
+    }
+  }
+
+  toggleBiomeVision(event: MouseEvent) {
+    const modeEnabled = this.props.mapController.isBiomeTileLayerEnabled;
+    if (modeEnabled) {
+      this.props.mapController.disableBiomeTileLayer();
+    } else {
+      this.props.mapController.enableBiomeTileLayer();
     }
   }
 
@@ -73,27 +82,45 @@ export default class TaiyakiMapToolbar extends React.Component<TaiyakiMapToolbar
     this.props.mapController.zoomOut();
   }
 
-  print(){
+  print() {
     console.dir(this.props.mapController!);
   }
 
   render() {
     return (
       <div role="toolbar" className={this.classes}>
-        <div className="p-2 space-x-2">
-          <TaiyakiMapButton icon="fa-plus" label="Zoom in" action={this.zoomIn} />
-          <TaiyakiMapButton icon="fa-minus" label="Zoom out" action={this.zoomOut} />
-          <TaiyakiMapButton icon="fa-map-pin" label="Add pin" action={this.addPoint} />
-          <TaiyakiMapButton icon="fa-edit" label="Toggle edit mode" action={this.toggleMode} />
-          <TaiyakiMapButton icon="fa-file-download" label="Download GeoJson" action={this.save} />
-          <TaiyakiMapButton icon="fa-eye-slash" label="Enable night vision" action={this.toggleNightVision} />
-          <TaiyakiMapButton icon="fa-print" label="Debug" action={this.print} />
-        </div>
-        <div id="taiyakiMousePosition" className="justify-self-center font-mono p-2 space-x-2" aria-label="Cursor coordinate indicator"></div>
-        <div className="justify-self-end p-2 space-x-2">
-        </div>
+        <TaiyakiMapButton icon="fa-plus" label="Zoom in" action={this.zoomIn} />
+        <TaiyakiMapButton icon="fa-minus" label="Zoom out" action={this.zoomOut} />
+        <TaiyakiMapButton icon="fa-map-pin" label="Add pin" action={this.addPoint} disabled />
+        <TaiyakiMapButton
+          icon="fa-edit"
+          label="Toggle edit mode"
+          action={this.toggleMode}
+          disabled
+        />
+        <TaiyakiMapButton
+          icon="fa-file-download"
+          label="Download GeoJson"
+          action={this.save}
+          disabled
+        />
+        <TaiyakiMapButton
+          icon="fa-eye-slash"
+          label="Enable night vision"
+          action={this.toggleNightVision}
+        />
+        <TaiyakiMapButton
+          icon="fa-eye-slash"
+          label="Enable biome vision"
+          action={this.toggleBiomeVision}
+        />
+        <TaiyakiMapButton icon="fa-print" label="Debug" action={this.print} disabled />
+        <div
+          id="taiyakiMousePosition"
+          className="font-mono"
+          aria-label="Cursor coordinate indicator"
+        ></div>
       </div>
-    )
+    );
   }
-
 }
