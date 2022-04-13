@@ -43,7 +43,8 @@ export default class TaiyakiMapButton extends React.Component<TaiyakiMapButtonCo
         disabled={this.props.disabled}
         onClick={this.props.action}
       >
-        {this.props.children ? (
+        {'children' in this.props ? (
+          // @ts-ignore
           this.props.children
         ) : this.props.loading ? (
           <div>
