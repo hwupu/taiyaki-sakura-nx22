@@ -1,8 +1,8 @@
 {
 	"url": "https://sakura-satellite.phwu.work/data/",
 	"center": {
-		"x": -385,
-		"y": 552
+		"x": -420,
+		"y": 600
 	},
 	"enableDebugTile": false,
 	"enableSelection": true,
