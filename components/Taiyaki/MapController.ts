@@ -182,19 +182,19 @@ const _initView = function (options: TaiyakiMapConfig, projection: Projection): 
 export default class TaiyakiMapController {
   private static instance: TaiyakiMapController;
 
-  _map: Map;
-  _view: View;
-  _extent: number[];
-  _projection: Projection;
-  _tileGrid: TileGrid;
-  _overworldTileLayer: TileLayer<any>;
-  _overworldLightTileLayer: TileLayer<any>;
-  _overworldBiomeTileLayer: TileLayer<any>;
-  _overworldFullTileLayer: TileLayer<any>;
-  _mousePosition: MousePosition | undefined;
-  _labelStyle: Style;
-  _landmarkVectorLayer: VectorLayer<any>;
-  _modifyLandmark: Modify;
+  private _map: Map;
+  private _view: View;
+  private _extent: number[];
+  private _projection: Projection;
+  private _tileGrid: TileGrid;
+  private _overworldTileLayer: TileLayer<any>;
+  private _overworldLightTileLayer: TileLayer<any>;
+  private _overworldBiomeTileLayer: TileLayer<any>;
+  private _overworldFullTileLayer: TileLayer<any>;
+  private _mousePosition: MousePosition | undefined;
+  private _labelStyle: Style;
+  private _landmarkVectorLayer: VectorLayer<any>;
+  private _modifyLandmark: Modify;
 
   isMousePositionEnabled: boolean;
   isLightTileLayerEnabled: boolean;
@@ -232,7 +232,7 @@ export default class TaiyakiMapController {
     this._map = new Map({
       target: config.mapContainerId,
       controls: [],
-      interactions: defaultInteraction({ mouseWheelZoom: false }).extend([new PinchZoom()]),
+      interactions: defaultInteraction().extend([new PinchZoom()]),
       layers: [this._overworldTileLayer, this._landmarkVectorLayer],
       view: this._view,
     });
